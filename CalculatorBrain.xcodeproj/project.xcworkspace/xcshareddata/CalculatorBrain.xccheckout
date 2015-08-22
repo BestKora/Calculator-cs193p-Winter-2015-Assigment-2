@@ -10,6 +10,8 @@
 	<string>CalculatorBrain</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>B33029A3BC0D88A68886FBA7215612AD80C9A1FD</key>
+		<string>github.com:BestKora/Calculator-cs193p-Winter-2015-Assigment-2.git</string>
 		<key>DDA02F6C45E05211C14398F627BCE0289D8D64D7</key>
 		<string>https://github.com/BestKora/CalculatorBrain-cs193p-2015.git</string>
 	</dict>
@@ -17,17 +19,27 @@
 	<string>CalculatorBrain.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DDA02F6C45E05211C14398F627BCE0289D8D64D7</key>
+		<key>B33029A3BC0D88A68886FBA7215612AD80C9A1FD</key>
 		<string>../..</string>
+		<key>DDA02F6C45E05211C14398F627BCE0289D8D64D7</key>
+		<string>../../../CalculatorBrain</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/BestKora/CalculatorBrain-cs193p-2015.git</string>
+	<string>github.com:BestKora/Calculator-cs193p-Winter-2015-Assigment-2.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DDA02F6C45E05211C14398F627BCE0289D8D64D7</string>
+	<string>B33029A3BC0D88A68886FBA7215612AD80C9A1FD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B33029A3BC0D88A68886FBA7215612AD80C9A1FD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Calculator-cs193p-Winter-2015-Assigment-2</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
