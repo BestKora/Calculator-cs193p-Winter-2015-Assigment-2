@@ -18,6 +18,7 @@ class CalculatorBrain
         case ConstantOperation(String, () -> Double)
         case UnaryOperation(String, Double -> Double)
         case BinaryOperation(String, (Double, Double) -> Double)
+        case Variable(String)
         
         var description: String {
             get {
@@ -30,6 +31,8 @@ class CalculatorBrain
                     return symbol
                 case .ConstantOperation(let symbol, _):
                     return symbol
+                case .Variable(let symbol):
+                    return symbol
 
                 }
             }
@@ -38,8 +41,9 @@ class CalculatorBrain
 
     private var opStack = [Op]()
     
-    
     private var knownOps = [String:Op]()
+
+    var variableValues = [String: Double]()
     
     init() {
         func learnOp (op: Op) {
@@ -102,6 +106,8 @@ class CalculatorBrain
                         return (operation(operand1, operand2), op2Evaluation.remainingOps)
                     }
                 }
+            case .Variable(let symbol):
+                return (variableValues[symbol], remainingOps)
             }
         }
         return (nil, ops)
@@ -135,4 +141,10 @@ class CalculatorBrain
         }
         return evaluate()
     }
+    
+    func pushOperand(symbol: String) -> Double? {
+        opStack.append(Op.Variable(symbol))
+        return evaluate()
+    }
+
 }
