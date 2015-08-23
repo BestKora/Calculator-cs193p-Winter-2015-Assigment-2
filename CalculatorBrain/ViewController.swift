@@ -101,30 +101,20 @@ class ViewController: UIViewController
     var displayValue: Double? {
         get {
             if let displayText = display.text {
-               return numberFormatter().numberFromString(displayText)?.doubleValue
+               return NumberFormatter.formatter.numberFromString(displayText)?.doubleValue
             }
             return nil
         }
         set {
             if (newValue != nil) {
              //  display.text = "\(newValue!)"
-               display.text = numberFormatter().stringFromNumber(newValue!)
+               display.text = NumberFormatter.formatter.stringFromNumber(newValue!)
             } else {
                 display.text = " "
             }
             userIsInTheMiddleOfTypingANumber = false
-            history.text = brain.displayStack() ?? " "
+            history.text = brain.description1
         }
-    }
-    
-    func numberFormatter () -> NSNumberFormatter{
-        let numberFormatterLoc = NSNumberFormatter()
-        numberFormatterLoc.numberStyle = .DecimalStyle
-        numberFormatterLoc.maximumFractionDigits = 10
-        numberFormatterLoc.notANumberSymbol = "Error"
-        numberFormatterLoc.groupingSeparator = " "
-        return numberFormatterLoc
-    }
-    
+    }    
 }
 
