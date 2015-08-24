@@ -95,8 +95,8 @@ class ViewController: UIViewController
             brain.setVariable(symbol, value: value)
             displayResult = brain.evaluateAndReportErrors()
         }
-
     }
+    
     @IBAction func pushVariable(sender: UIButton) {
         if userIsInTheMiddleOfTypingANumber {
             enter()
