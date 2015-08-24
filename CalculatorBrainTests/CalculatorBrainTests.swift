@@ -20,13 +20,6 @@ class CalculatorBrainTests: XCTestCase {
         XCTAssertEqual(brain.displayStack()!, "10.0 cos")
      }
     
-    func testPushOperandVariable() {
-        XCTAssertNil(brain.pushOperand("x"))
-        brain.variableValues = ["x": 5.2]
-        XCTAssertEqual(5.2, brain.pushOperand("x")!)
-        XCTAssertEqual(10.4, brain.performOperation("+")!)
-    }
-    
     func testDescription() {
         
         // 3 - 5

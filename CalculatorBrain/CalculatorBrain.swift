@@ -40,10 +40,29 @@ class CalculatorBrain
     }
 
     private var opStack = [Op]()
-    
     private var knownOps = [String:Op]()
-
-    var variableValues = [String: Double]()
+    private var variableValues = [String: Double]()
+   
+    func getVariable(symbol: String) -> Double? {
+        return variableValues[symbol]
+    }
+    
+    func setVariable(symbol: String, value: Double) {
+        variableValues[symbol] = value
+    }
+    
+    func clearVariables() {
+        variableValues.removeAll()
+    }
+    
+    func clearStack() {
+        opStack.removeAll()
+    }
+    
+    func clearAll() {
+        clearVariables()
+        clearStack()
+    }
     
     init() {
         func learnOp (op: Op) {

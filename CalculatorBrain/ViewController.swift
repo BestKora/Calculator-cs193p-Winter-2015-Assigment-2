@@ -71,8 +71,25 @@ class ViewController: UIViewController
         }
      }
     
+    @IBAction func setVariable(sender: UIButton) {
+        userIsInTheMiddleOfTypingANumber = false
+        
+        let symbol = dropFirst(sender.currentTitle!)
+        if let value = displayValue {
+            brain.setVariable(symbol, value: value)
+            displayValue = brain.evaluate()
+        }
+
+    }
+    @IBAction func pushVariable(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            enter()
+        }
+        displayValue = brain.pushOperand(sender.currentTitle!)
+    }
+    
     @IBAction func clearAll(sender: AnyObject) {
-          brain = CalculatorBrain()
+          brain.clearAll()
           displayValue = 0
     }
  
