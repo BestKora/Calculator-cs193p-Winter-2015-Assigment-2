@@ -26,8 +26,6 @@ class ViewController: UIViewController
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
-        //        println("digit = \(digit)");
-        
         if userIsInTheMiddleOfTypingANumber {
             
              //----- Не пускаем избыточную точку ---------------
@@ -100,6 +98,8 @@ class ViewController: UIViewController
             } else {
                 display.text = "0"
             }
+        } else {
+            displayValue = brain.popStack()
         }
     }
     

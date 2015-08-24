@@ -271,10 +271,17 @@ class CalculatorBrain
     }
 
     
+    func popStack() -> Double? {
+        if !opStack.isEmpty {
+            opStack.removeLast()
+        }
+        return evaluate()
+    }
+    
+
     func evaluate() -> Double? {
         let (result, remainder) = evaluate(opStack)
-        //let (result, _) = evaluate(opStack)
-        println("\(opStack) = \(result) with \(remainder) left over")
+ //       println("\(opStack) = \(result) with \(remainder) left over")
             if result != nil {
             if result!.isNaN || result!.isInfinite {
                 return nil
