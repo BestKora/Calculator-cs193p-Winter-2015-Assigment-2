@@ -22,6 +22,31 @@ class ViewController: UIViewController
     
     var userIsInTheMiddleOfTypingANumber = false
     var brain = CalculatorBrain()
+    
+    // Свойство, запоминающее результаты оценки стэка,
+    // сделанные в Моделе CalculatorBrain
+    // Его тип Result определен как перечисление enum
+    // в Моделе CalculatorBrain
+    var displayResult: CalculatorBrain.Result = .Value(0.0) {
+        // Наблюдатель Свойства модифицирует две IBOutlet метки
+        didSet {
+            // используется свойство description перечисления
+            // enum Result
+            display.text = displayResult.description 
+            userIsInTheMiddleOfTypingANumber = false
+            history.text = brain.description1  + " ="
+        }
+    }
+    
+    // вычисляемое read-only свойство, отображающее UILabel display.text
+    var displayValue: Double? {
+        get {
+            if let displayText = display.text {
+                return NumberFormatter.formatter.numberFromString(displayText)?.doubleValue
+            }
+            return nil
+        }
+    }
 
     
     @IBAction func appendDigit(sender: UIButton) {
@@ -49,25 +74,18 @@ class ViewController: UIViewController
             enter()
         }
         if let operation = sender.currentTitle {
-            if let result = brain.performOperation(operation) {
-                 displayValue = result
-                 history.text =  history.text! + " ="
-            } else {
-                // error?
-                displayValue = nil  // задание 2
-                history.text =  history.text! + " = Error"
-            }
+            brain.performOperation(operation)
+            displayResult = brain.evaluateAndReportErrors()
         }
     }
     
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         if let value = displayValue {
-               displayValue = brain.pushOperand(value)
-            } else {
-               displayValue = nil
-        }
-     }
+               brain.pushOperand(value)
+            }
+        displayResult = brain.evaluateAndReportErrors()
+}
     
     @IBAction func setVariable(sender: UIButton) {
         userIsInTheMiddleOfTypingANumber = false
@@ -75,7 +93,7 @@ class ViewController: UIViewController
         let symbol = dropFirst(sender.currentTitle!)
         if let value = displayValue {
             brain.setVariable(symbol, value: value)
-            displayValue = brain.evaluate()
+            displayResult = brain.evaluateAndReportErrors()
         }
 
     }
@@ -83,23 +101,26 @@ class ViewController: UIViewController
         if userIsInTheMiddleOfTypingANumber {
             enter()
         }
-        displayValue = brain.pushOperand(sender.currentTitle!)
+        brain.pushOperand(sender.currentTitle!)
+        displayResult = brain.evaluateAndReportErrors()
     }
     
     @IBAction func clearAll(sender: AnyObject) {
           brain.clearAll()
-          displayValue = 0
+          displayResult = brain.evaluateAndReportErrors()
     }
  
     @IBAction func backSpace(sender: AnyObject) {
         if userIsInTheMiddleOfTypingANumber {
             if count(display.text!) > 1 {
                 display.text = dropLast(display.text!)
-            } else {
-                display.text = "0"
+                } else {
+                userIsInTheMiddleOfTypingANumber = false
+                displayResult = brain.evaluateAndReportErrors()
             }
         } else {
-            displayValue = brain.popStack()
+            brain.popStack()
+            displayResult = brain.evaluateAndReportErrors()
         }
     }
     
@@ -115,27 +136,5 @@ class ViewController: UIViewController
         }
     }
     
-    var displayValue: Double? {
-        get {
-            if let displayText = display.text {
-               return NumberFormatter.formatter.numberFromString(displayText)?.doubleValue
-            }
-            return nil
-        }
-        set {
-            if (newValue != nil) {
-             //  display.text = "\(newValue!)"
-               display.text = NumberFormatter.formatter.stringFromNumber(newValue!)
-            } else {
-                display.text = " "
-            }
-            userIsInTheMiddleOfTypingANumber = false
-            
-            //          history.text = brain.displayStack()
-            //          history.text = brain.description
-            
-            history.text = brain.description1
-        }
-    }    
 }
 
